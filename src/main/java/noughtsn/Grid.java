@@ -3,7 +3,7 @@ package noughtsn;
 public class Grid {
 
     boolean play(int index) {
-        if (grid[index] != '\0') throw new IllegalArgumentException();
+        if (grid[index] != '\0') throw new IllegalArgumentException("Square already played.");
         grid[index] = turn ? 'O' : 'X';
         turn = !turn;
         return index == 4 && hasThreeInADig(0)
@@ -21,6 +21,7 @@ public class Grid {
                 getRow(2);
     }
 
+    // Makes a row string.
     private String getRow(int row) {
         return "\n " +
                 toTwo(grid[row * 3]) +
@@ -31,6 +32,7 @@ public class Grid {
                 "\n";
     }
 
+    // Converts chars from grid storage to a string of length two.
     private String toTwo(char symb) {
         return switch (symb) {
             case '\0' -> "  ";
