@@ -6,11 +6,10 @@ public class Grid {
         if (grid[index] != '\0') throw new IllegalArgumentException("Square already played.");
         grid[index] = turn ? 'O' : 'X';
         turn = !turn;
-        return index == 4 && hasThreeInADig(0)
-            || index == 4 && hasThreeInADig(2)
-            || index % 2 == 0 && hasThreeInADig(index)
+        return hasThreeInADig(index)
             || hasThreeInACol(index % 3)
             || hasThreeInARow(index / 3);
+
     }
 
     public String toString() {
@@ -50,8 +49,9 @@ public class Grid {
         return grid[col] == grid[3 + col] && grid[3 + col] == grid[6 + col];
     }
 
-    private boolean hasThreeInADig(int dig) {
-        return grid[dig] == grid[4] && grid[4] == grid[8 - dig];
+    private boolean hasThreeInADig(int ind) {
+        return ind % 4 == 0                 && grid[0] == grid[4] && grid[4] == grid[8]
+            || ind - 2 - (ind / 3) * 2 == 0 && grid[2] == grid[4] && grid[4] == grid[6];
     }
 
     public Grid() {

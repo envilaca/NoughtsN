@@ -63,6 +63,18 @@ public class GridTests {
     }
 
     @Test
+    void thisDoesNotWin() {
+        // Arrange
+        grid.play(0);
+        grid.play(1);
+        grid.play(2);
+        grid.play(3);
+
+        // Assert
+        Assertions.assertFalse(grid.play(4));
+    }
+
+    @Test
     void gridLooksRight() {
         // Arrange
         grid.play(0);
