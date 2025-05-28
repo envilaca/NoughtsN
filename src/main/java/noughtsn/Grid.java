@@ -10,9 +10,9 @@ public class Grid {
     boolean play(int index) {
         if (grid[index] != 0) throw new IllegalArgumentException("Square already played.");
         grid[index] = (byte) (turn ? +1 : -1); turn = !turn; Computer.free.remove(index);
-        return index % 2 == 0 && hasThreeInADig() == 3
-                || hasThreeInACol(index % RWS)    == 3
-                || hasThreeInARow(index / CLS)    == 3;
+        return index % 2 == 0 && sameInADig() == 3
+                || sameInACol(index % RWS)    == 3
+                || sameInARow(index / CLS)    == 3;
     }
 
     public String toString() {
@@ -34,7 +34,7 @@ public class Grid {
                 "\n";
     }
 
-    // Converts chars from grid storage to a string of length two.
+    // Converts bytes from grid storage to a string of length two.
     private String toTwo(byte symb) {
         return switch (symb) {
             case  0 -> "  ";
@@ -44,11 +44,11 @@ public class Grid {
         };
     }
 
-    private byte hasThreeInARow(int row) {
+    private byte sameInARow(int row) {
         return (byte) abs(grid[row * RWS] + grid[row * RWS + 1] + grid[row * RWS + 2]);
     }
 
-    private byte hasThreeInACol(int col) {
+    private byte sameInACol(int col) {
         return (byte) abs(grid[col]       + grid[CLS + col]     + grid[CLS * 2 + col]);
     }
 
@@ -57,7 +57,7 @@ public class Grid {
     // index - (CLS - 1) - (index / RWS) * (CLS - 1) == 0    for the sinister diagonal
     // However, this is probably more intensive than just actually checking them every time, so I'm
     // not going to do that anymore.
-    private byte hasThreeInADig() {
+    private byte sameInADig() {
         return (byte) Math.max(abs(grid[0] + grid[4] + grid[8]), abs(grid[2] + grid[4] + grid[6]));
     }
 
