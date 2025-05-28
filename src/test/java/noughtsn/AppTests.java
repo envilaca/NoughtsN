@@ -12,6 +12,8 @@ public class AppTests {
         readableOut = new ByteArrayOutputStream();
         originalOut = System.out;
         System.setOut(new PrintStream(readableOut));
+
+        grid = new Grid();
     }
 
     @Test
@@ -19,7 +21,7 @@ public class AppTests {
         NoughtsN crosses = new NoughtsN("exit\n");
         crosses.run();
 
-        Assertions.assertEquals(emptyGrid, readableOut.toString());
+        Assertions.assertEquals(grid.toString(), lastGrid(readableOut));
     }
 
     @Test
@@ -27,7 +29,17 @@ public class AppTests {
         NoughtsN crosses = new NoughtsN("1\nexit\n");
         crosses.run();
 
-        Assertions.assertEquals(emptyGrid + topLeft, readableOut.toString());
+        grid.play(0);
+
+        Assertions.assertEquals(grid.toString(), lastGrid(readableOut));
+    }
+
+    @Test
+    public void playerCanWin() {
+        NoughtsN crosses = new NoughtsN("1\n4\n2\n5\n3\n");
+        crosses.run();
+
+        Assertions.assertEquals("You win!", lastLine(readableOut));
     }
 
     @AfterEach
@@ -35,24 +47,30 @@ public class AppTests {
         System.setOut(originalOut);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    private String lastGrid(ByteArrayOutputStream output) {
+        String outStr = output.toString();
+
+        int i = outStr.length() - 1;
+        for (; i >= 0 && outStr.charAt(i) != '│' ; i--);
+        int endex = i + 5;
+
+        for (int j = 0; i >= 0 && j < 5 ; i--) if (outStr.charAt(i) == '\n') j++;
+
+        return outStr.substring(i + 1, endex);
+    }
+
+    private String lastLine(ByteArrayOutputStream output) {
+        String outStr = output.toString();
+
+        int i = outStr.length() - 2;
+        while (i >= 0 && outStr.charAt(i) != '\n') i--;
+
+        return outStr.substring(i + 1);
+    }
+
     private PrintStream originalOut;
     private ByteArrayOutputStream readableOut;
-
-    private static final String emptyGrid = """
-            
-                │    │  \s
-            ────┼────┼────
-                │    │  \s
-            ────┼────┼────
-                │    │  \s
-            """;
-    private static final String topLeft = """
-            
-             ⟩⟨ │    │  \s
-            ────┼────┼────
-                │    │  \s
-            ────┼────┼────
-                │    │  \s
-            """;
+    private Grid grid;
 
 }
