@@ -16,7 +16,7 @@ public class AppTests {
 
     @Test
     public void gridPreview() {
-        NoughtsN crosses = new NoughtsN("");
+        NoughtsN crosses = new NoughtsN("exit\n");
         crosses.run();
 
         Assertions.assertEquals(emptyGrid, readableOut.toString());
@@ -24,7 +24,7 @@ public class AppTests {
 
     @Test
     public void gridEntry() {
-        NoughtsN crosses = new NoughtsN("1\n");
+        NoughtsN crosses = new NoughtsN("1\nexit\n");
         crosses.run();
 
         Assertions.assertEquals(emptyGrid + topLeft, readableOut.toString());
