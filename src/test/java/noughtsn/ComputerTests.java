@@ -45,7 +45,7 @@ public class ComputerTests {
         grid.play(0);
         grid.play(3);
         grid.play(1);
-        grid.play(4);
+        grid.play(6);
 
         Assertions.assertEquals(2, computer.choose());
     }
