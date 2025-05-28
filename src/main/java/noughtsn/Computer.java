@@ -7,30 +7,32 @@ import static noughtsn.Grid.RWS;
 
 public class Computer {
 
+    @SuppressWarnings("StatementWithEmptyBody")
     int choose() {
-        Set<Integer> free = grid.getFree();
+        int last;
+        if (grid.getHistory().isEmpty()) last = 1;
+        else last = grid.getHistory().getLast();
 
-        try {
-            int last = grid.getHistory().getLast();
+        int[] sq;
+        if      (grid.dexter(last) && grid.sameIn(sq = grid.dig(Grid.DEX)) == 2);
+        else if (grid.sinstr(last) && grid.sameIn(sq = grid.dig(Grid.SIN)) == 2);
+        else if (grid.sameIn(sq = grid.col(last % CLS)) == 2);
+        else if (grid.sameIn(sq = grid.row(last / RWS)) == 2);
+        else return free.toArray(new Integer[0])[new Random().nextInt(free.size())];
+        return getFree(sq);
+    }
 
-            if (last - (CLS - 1) - (last / RWS) * (CLS - 1) == 0 && grid.sameInADig(Grid.SIN) == 2)
-                for (int i = 2; i <  8; i += 2) if (free.contains(i)) return i;
-            if (last % (RWS * CLS / 2) == 0 && grid.sameInADig(Grid.DEX) == 2)
-                for (int i = 0; i < 12; i += 4) if (free.contains(i)) return i;
-            if (grid.sameInACol(last % CLS) == 2)
-                for (int i = last % CLS; i < RWS * CLS; i += CLS) if (free.contains(i))  return i;
-            if (grid.sameInARow(last / RWS) == 2)
-                for (int i = last / RWS * RWS; i < last / RWS * RWS + CLS; i++) if (free.contains(i)) return i;
-        } catch (NoSuchElementException ignored) {
-            // Computer is going first.
-        }
-        return grid.getFree().toArray(new Integer[0])[new Random().nextInt(free.size())];
+    int getFree(int[] squares) {
+        for (int i : squares) if (free.contains(i)) return i;
+        throw new IllegalArgumentException();
     }
 
     public void setGrid(Grid grid) {
         this.grid = grid;
+        free = grid.getFree();
     }
 
     private Grid grid;
+    private Set<Integer> free;
 
 }
