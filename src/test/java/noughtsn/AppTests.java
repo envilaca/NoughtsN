@@ -18,10 +18,19 @@ public class AppTests {
     }
 
     @Test
-    public void boardPreview() {
+    public void gridPreview() {
         NoughtsN crosses = new NoughtsN("");
         crosses.run();
+
         Assertions.assertEquals(emptyGrid, readableOut.toString());
+    }
+
+    @Test
+    public void gridEntry() {
+        NoughtsN crosses = new NoughtsN("1\n");
+        crosses.run();
+
+        Assertions.assertEquals(topLeft.lines(), readableOut.toString().lines().skip(6));
     }
 
     @AfterAll
@@ -35,6 +44,14 @@ public class AppTests {
     private static final String emptyGrid = """
             
                 │    │  \s
+            ────┼────┼────
+                │    │  \s
+            ────┼────┼────
+                │    │  \s
+            """;
+    private static final String topLeft = """
+            
+             ⟩⟨ │    │  \s
             ────┼────┼────
                 │    │  \s
             ────┼────┼────
