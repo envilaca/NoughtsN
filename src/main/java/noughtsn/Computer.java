@@ -7,7 +7,6 @@ public class Computer {
     int choose() {
         int[] sq = new int[]{free.toArray(new Integer[0])[new Random().nextInt(free.size())]};
         for (int i : trimmedHist()) {
-            System.out.println("Doing this thing, i is " + i);
             if      (grid.dexter(i) && grid.sameIn(sq = grid.dig(Grid.DEX)) == 2) break;
             else if (grid.sinstr(i) && grid.sameIn(sq = grid.dig(Grid.SIN)) == 2) break;
             else if (grid.sameIn(sq = grid.col(i % Grid.CLS)) == 2) break;
