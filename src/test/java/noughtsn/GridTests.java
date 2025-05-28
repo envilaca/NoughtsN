@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static noughtsn.Grid.CLS;
+import static noughtsn.Grid.RWS;
+
 public class GridTests {
 
     @BeforeEach
@@ -28,38 +31,55 @@ public class GridTests {
 
     @Test
     void horizontalWinWins() {
-        // Act
-        grid.play(3);
-        grid.play(0);
-        grid.play(4);
-        grid.play(1);
+        for (int i = 0; i < RWS * 3; i += RWS, grid.clear()) {
+            // Act
+            grid.play(i);
+            grid.play(i < RWS * 2 ? i + 3 : i - 3);
+            grid.play(i + 1);
+            grid.play(i < RWS * 2 ? i + 4 : i - 2);
 
-        // Assert
-        Assertions.assertTrue(grid.play(5));
+            // Assert
+            Assertions.assertTrue(grid.play(i + 2));
+        }
     }
 
     @Test
     void verticalWinWins() {
-        // Act
-        grid.play(1);
-        grid.play(2);
-        grid.play(4);
-        grid.play(5);
+        for (int i = 0; i < CLS; i++, grid.clear()) {
+            // Act
+            grid.play(i);
+            grid.play(i < 2 ? i + 1 : i - 1);
+            grid.play(i + CLS);
+            grid.play(i < 2 ? i + CLS + 1 : i + CLS - 1);
 
-        // Assert
-        Assertions.assertTrue(grid.play(7));
+            // Assert
+            Assertions.assertTrue(grid.play(i + CLS * 2));
+        }
+
     }
 
     @Test
     void diagonalWinWins() {
-        // Act
-        grid.play(2);
-        grid.play(0);
-        grid.play(4);
-        grid.play(8);
+        for (int i = 0; i != 4 && i < 10; i += 2, grid.clear()) {
+            // Act
+            grid.play(i);
+            grid.play(1);
+            grid.play((RWS * CLS) / 2);
+            grid.play(3);
 
-        // Assert
-        Assertions.assertTrue(grid.play(6));
+            // Assert
+            Assertions.assertTrue(grid.play(RWS * CLS - 1 - i));
+        }
+        for (int i = 0; i != 4 && i < 10; i += 2, grid.clear()) {
+            // Act
+            grid.play(i);
+            grid.play(1);
+            grid.play(RWS * CLS - 1 - i);
+            grid.play(3);
+
+            // Assert
+            Assertions.assertTrue(grid.play((RWS * CLS) / 2));
+        }
     }
 
     @Test
@@ -89,13 +109,13 @@ public class GridTests {
 
         // Assert
         Assertions.assertEquals("""
-            
-             ⟩⟨ │ ⟩⟨ │ ()
-            ────┼────┼────
-             () │ () │ ⟩⟨
-            ────┼────┼────
-             ⟩⟨ │ () │ ⟩⟨
-            """,
+                        
+                         ⟩⟨ │ ⟩⟨ │ ()
+                        ────┼────┼────
+                         () │ () │ ⟩⟨
+                        ────┼────┼────
+                         ⟩⟨ │ () │ ⟩⟨
+                        """,
                 grid.toString()
         );
     }
