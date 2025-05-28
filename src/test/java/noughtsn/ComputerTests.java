@@ -9,6 +9,7 @@ public class ComputerTests {
     @BeforeEach
     public void beforeEach() {
         grid = new Grid();
+        computer.setGrid(grid);
     }
 
     @Test
@@ -39,7 +40,17 @@ public class ComputerTests {
         Assertions.assertEquals(2, computer.choose());
     }
 
-    private static final Computer computer = new Computer();
-    private Grid grid;
+    @Test
+    public void computerTriesWins() {
+        grid.play(0);
+        grid.play(3);
+        grid.play(1);
+        grid.play(4);
+
+        Assertions.assertEquals(2, computer.choose());
+    }
+
+    private final Computer computer = new Computer();
+    private Grid grid = new Grid();
 
 }
