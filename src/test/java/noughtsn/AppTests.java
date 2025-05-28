@@ -36,10 +36,22 @@ public class AppTests {
 
     @Test
     public void playerCanWin() {
-        NoughtsN crosses = new NoughtsN("1\n4\n2\n5\n3\n");
+        Computer computer = new TestComputer("4\n5\n");
+
+        NoughtsN crosses = new NoughtsN("1\n2\n3\n", computer);
         crosses.run();
 
         Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
+    }
+
+    @Test
+    public void playerCanLose() {
+        Computer computer = new TestComputer("3\n5\n7\n");
+
+        NoughtsN crosses = new NoughtsN("1\n6\n8\n", computer);
+        crosses.run();
+
+        Assertions.assertEquals("You lose!", (lastLine(readableOut)).trim());
     }
 
     @AfterEach

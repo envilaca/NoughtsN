@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class NoughtsN implements Runnable {
 
     private final Grid grid;
-    private static final Computer COMPUTER = new Computer();
+    private final Computer computer;
 
     @Override
     public void run() {
         String input;
 
         do {
-            System.out.print(grid);
+            System.out.println(grid);
         } while (!(input = scanner.nextLine()).equals("exit") && !grid.play(Integer.parseInt(input) - 1));
         System.out.println("You " + grid.getResult() + "!");
 
@@ -23,11 +23,22 @@ public class NoughtsN implements Runnable {
     public NoughtsN(InputStream input) {
         scanner = new Scanner(input);
         grid = new Grid();
+        computer = new Computer();
+        computer.setGrid(grid);
     }
 
     public NoughtsN(String input) {
         scanner = new Scanner(input);
         grid = new Grid();
+        computer = new Computer();
+        computer.setGrid(grid);
+    }
+
+    public NoughtsN(String input, Computer computer) {
+        scanner = new Scanner(input);
+        grid = new Grid();
+        this.computer = computer;
+        this.computer.setGrid(grid);
     }
 
     private final Scanner scanner;
