@@ -1,16 +1,18 @@
 package noughtsn;
 
+import static java.lang.Math.abs;
+
 public class Grid {
 
     protected static int RWS = 3; // No. of rows.
     protected static int CLS = 3; // No. of columns.
 
     boolean play(int index) {
-        if (grid[index] != '\0') throw new IllegalArgumentException("Square already played.");
-        grid[index] = turn ? 'O' : 'X'; turn = !turn; Computer.free.remove(index);
-        return hasThreeInADig(index)
-            || hasThreeInACol(index % RWS)
-            || hasThreeInARow(index / CLS);
+        if (grid[index] != 0) throw new IllegalArgumentException("Square already played.");
+        grid[index] = (byte) (turn ? +1 : -1); turn = !turn; Computer.free.remove(index);
+        return index % 2 == 0 && hasThreeInADig() == 3
+                || hasThreeInACol(index % RWS)    == 3
+                || hasThreeInARow(index / CLS)    == 3;
     }
 
     public String toString() {
@@ -33,26 +35,30 @@ public class Grid {
     }
 
     // Converts chars from grid storage to a string of length two.
-    private String toTwo(char symb) {
+    private String toTwo(byte symb) {
         return switch (symb) {
-            case '\0' -> "  ";
-            case 'X'  -> "⟩⟨";
-            case 'O'  -> "()";
+            case  0 -> "  ";
+            case -1 -> "⟩⟨";
+            case +1 -> "()";
             default -> throw new IllegalStateException("Unexpected value: " + symb);
         };
     }
 
-    private boolean hasThreeInARow(int row) {
-        return grid[row * RWS] == grid[row * RWS + 1] && grid[row * RWS + 1] == grid[row * RWS + 2];
+    private byte hasThreeInARow(int row) {
+        return (byte) abs(grid[row * RWS] + grid[row * RWS + 1] + grid[row * RWS + 2]);
     }
 
-    private boolean hasThreeInACol(int col) {
-        return grid[col] == grid[CLS + col] && grid[CLS + col] == grid[CLS * 2 + col];
+    private byte hasThreeInACol(int col) {
+        return (byte) abs(grid[col]       + grid[CLS + col]     + grid[CLS * 2 + col]);
     }
 
-    private boolean hasThreeInADig(int ind) {
-        return ind % (RWS * CLS / 2) == 0                     && grid[0] == grid[4] && grid[4] == grid[8]
-            || ind - (CLS - 1) - (ind / RWS) * (CLS - 1) == 0 && grid[2] == grid[4] && grid[4] == grid[6];
+    // I used to check here if the square being passed in was a diagonal, using the following:
+    //                       index % (RWS * CLS / 2) == 0    for the dexter diagonal
+    // index - (CLS - 1) - (index / RWS) * (CLS - 1) == 0    for the sinister diagonal
+    // However, this is probably more intensive than just actually checking them every time, so I'm
+    // not going to do that anymore.
+    private byte hasThreeInADig() {
+        return (byte) Math.max(abs(grid[0] + grid[4] + grid[8]), abs(grid[2] + grid[4] + grid[6]));
     }
 
     protected void clear() {
@@ -60,10 +66,10 @@ public class Grid {
     }
 
     public Grid() {
-        grid = new char[RWS * CLS];
+        grid = new byte[RWS * CLS];
     }
 
-    char[] grid;
+    byte[] grid;
     boolean turn; // X or O.
 
 }
