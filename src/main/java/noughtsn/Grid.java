@@ -56,9 +56,7 @@ public class Grid {
     }
 
     protected void clear() {
-        for (int i = 0; i < RWS * CLS; i++) {
-            grid[i] = '\0';
-        }
+        for (int i = 0; i < RWS * CLS; i++) grid[i] = '\0';
     }
 
     public Grid() {
