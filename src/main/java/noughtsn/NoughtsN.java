@@ -10,7 +10,7 @@ public class NoughtsN implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Hello, world!");
+        System.out.print(grid);
         scanner.close();
     }
 

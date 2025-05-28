@@ -21,14 +21,7 @@ public class AppTests {
     public void boardPreview() {
         NoughtsN crosses = new NoughtsN("");
         crosses.run();
-        Assertions.assertEquals("""
-                       \s
-                            │    │  \s
-                        ────┼────┼────
-                            │    │  \s
-                        ────┼────┼────
-                            │    │  \s
-                       \s""", readableOut.toString());
+        Assertions.assertEquals(emptyGrid, readableOut.toString());
     }
 
     @AfterAll
@@ -38,5 +31,14 @@ public class AppTests {
 
     private static PrintStream originalOut;
     private static ByteArrayOutputStream readableOut;
+
+    private static final String emptyGrid = """
+            
+                │    │  \s
+            ────┼────┼────
+                │    │  \s
+            ────┼────┼────
+                │    │  \s
+            """;
 
 }
