@@ -10,12 +10,13 @@ public class NoughtsN implements Runnable {
 
     @Override
     public void run() {
-        String input;
+        String input = "";
 
         do {
             System.out.println(grid);
-        } while (!(input = scanner.nextLine()).equals("exit") && !grid.play(Integer.parseInt(input) - 1));
-        System.out.println("You " + grid.getResult() + "!");
+            if (!grid.getTurn()) if ((input = scanner.nextLine()).equals("exit")) break;
+        } while (!grid.play(grid.getTurn() ? computer.choose() : Integer.parseInt(input) - 1));
+        System.out.println("You " + (grid.getTurn() ? "win!" : "lose!"));
 
         scanner.close();
     }

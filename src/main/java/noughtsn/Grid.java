@@ -81,9 +81,6 @@ public class Grid {
         return dig ? new int[]{0, 4, 8} : new int[]{2, 4, 6};
     }
 
-    public String getResult() {
-        return turn ? "win" : "lose";
-    }
 
     public Grid() {
         grid = new byte[RWS * CLS];
@@ -91,8 +88,12 @@ public class Grid {
         free = new HashSet<>(Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8));
     }
 
-    private final byte[] grid; // Initialised with 0s.
+    public boolean getTurn() {
+        return turn;
+    }
+
     private boolean turn;      // true = O. false = X.
+    private final byte[] grid; // Initialised with 0s.
 
     public List<Integer> getHistory() {
         return history;

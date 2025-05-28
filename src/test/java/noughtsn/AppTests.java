@@ -26,10 +26,12 @@ public class AppTests {
 
     @Test
     public void gridEntry() {
-        NoughtsN crosses = new NoughtsN("1\nexit\n");
+        Computer computer = new TestComputer("2\n");
+        NoughtsN crosses = new NoughtsN("1\nexit\n", computer);
         crosses.run();
 
         grid.play(0);
+        grid.play(1);
 
         Assertions.assertEquals(grid.toString(), lastGrid(readableOut));
     }
