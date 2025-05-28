@@ -108,24 +108,19 @@ public class GridTests {
         grid.play(5);
 
         // Assert
-        Assertions.assertEquals("""
-                        
-                         ⟩⟨ │ ⟩⟨ │ ()
-                        ────┼────┼────
-                         () │ () │ ⟩⟨
-                        ────┼────┼────
-                         ⟩⟨ │ () │ ⟩⟨
-                        """,
-                grid.toString()
+        Assertions.assertEquals(fullGrid, grid.toString()
         );
     }
 
     private Grid grid;
 
-}
+    private static final String fullGrid = """
+            
+             ⟩⟨ │ ⟩⟨ │ ()
+            ────┼────┼────
+             () │ () │ ⟩⟨
+            ────┼────┼────
+             ⟩⟨ │ () │ ⟩⟨
+            """;
 
-//  ⟩⟨ │ ⟩⟨ │ ()
-// ────┼────┼────
-//  () │ () │ ⟩⟨
-// ────┼────┼────
-//  ⟩⟨ │ () │ ⟩⟨
+}
