@@ -1,11 +1,27 @@
 package noughtsn;
 
-public class NoughtsN {
+import java.io.InputStream;
+import java.util.Scanner;
 
-    public static void main(String[] args) {
+public class NoughtsN implements Runnable {
 
+    private static final Grid grid = new Grid();
+    private static final Computer COMPUTER = new Computer();
+
+    @Override
+    public void run() {
+        System.out.println("Hello, world!");
+        scanner.close();
     }
 
-    public static final Computer COMPUTER = new Computer();
+    public NoughtsN(InputStream input) {
+        scanner = new Scanner(input);
+    }
+
+    public NoughtsN(String input) {
+        scanner = new Scanner(input);
+    }
+
+    private final Scanner scanner;
 
 }
