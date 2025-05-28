@@ -2,9 +2,6 @@ package noughtsn;
 
 import java.util.*;
 
-import static noughtsn.Grid.CLS;
-import static noughtsn.Grid.RWS;
-
 public class Computer {
 
     int choose() {
@@ -13,8 +10,8 @@ public class Computer {
             System.out.println("Doing this thing, i is " + i);
             if      (grid.dexter(i) && grid.sameIn(sq = grid.dig(Grid.DEX)) == 2) break;
             else if (grid.sinstr(i) && grid.sameIn(sq = grid.dig(Grid.SIN)) == 2) break;
-            else if (grid.sameIn(sq = grid.col(i % CLS)) == 2) break;
-            else if (grid.sameIn(sq = grid.row(i / RWS)) == 2) break;
+            else if (grid.sameIn(sq = grid.col(i % Grid.CLS)) == 2) break;
+            else if (grid.sameIn(sq = grid.row(i / Grid.RWS)) == 2) break;
         }
         return getFree(sq);
     }
