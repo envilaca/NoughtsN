@@ -1,17 +1,14 @@
 package noughtsn;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class AppTests {
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeEach
+    public void beforeEach() {
         readableOut = new ByteArrayOutputStream();
         originalOut = System.out;
         System.setOut(new PrintStream(readableOut));
@@ -30,16 +27,16 @@ public class AppTests {
         NoughtsN crosses = new NoughtsN("1\n");
         crosses.run();
 
-        Assertions.assertEquals(topLeft.lines(), readableOut.toString().lines().skip(6));
+        Assertions.assertEquals(emptyGrid + topLeft, readableOut.toString());
     }
 
-    @AfterAll
-    public static void afterAll() {
+    @AfterEach
+    public void afterEach() {
         System.setOut(originalOut);
     }
 
-    private static PrintStream originalOut;
-    private static ByteArrayOutputStream readableOut;
+    private PrintStream originalOut;
+    private ByteArrayOutputStream readableOut;
 
     private static final String emptyGrid = """
             
