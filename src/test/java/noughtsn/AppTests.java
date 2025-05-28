@@ -39,7 +39,7 @@ public class AppTests {
         NoughtsN crosses = new NoughtsN("1\n4\n2\n5\n3\n");
         crosses.run();
 
-        Assertions.assertEquals("You win!", lastLine(readableOut));
+        Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
     }
 
     @AfterEach

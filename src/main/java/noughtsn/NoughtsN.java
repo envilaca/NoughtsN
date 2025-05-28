@@ -12,11 +12,11 @@ public class NoughtsN implements Runnable {
     public void run() {
         String input;
 
-        System.out.print(grid);
-        while (!(input = scanner.nextLine()).equals("exit")) {
-            grid.play(Integer.parseInt(input) - 1);
+        do {
             System.out.print(grid);
-        }
+        } while (!(input = scanner.nextLine()).equals("exit") && !grid.play(Integer.parseInt(input) - 1));
+        System.out.println("You " + grid.getResult() + "!");
+
         scanner.close();
     }
 
