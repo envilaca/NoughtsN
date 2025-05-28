@@ -22,10 +22,10 @@ public class Grid {
         history.add(index);
         free.remove(index);
 
-        return index - (CLS - 1) - (index / RWS) * (CLS - 1) == 0 && sameInADig(SIN) == 3
-                || index % (RWS * CLS / 2) == 0 && sameInADig(DEX) == 3
-                || sameInACol(index % CLS) == 3
-                || sameInARow(index / RWS) == 3;
+        return dexter(index) && sameIn(dig(DEX)) == 3
+            || sinstr(index) && sameIn(dig(SIN)) == 3
+            || sameIn(col(index % CLS)) == 3
+            || sameIn(row(index / RWS)) == 3;
     }
 
     public String toString() {
@@ -57,18 +57,29 @@ public class Grid {
         };
     }
 
-    public byte sameInARow(int row) {
-        return (byte) abs(grid[row * RWS] + grid[row * RWS + 1] + grid[row * RWS + 2]);
+    public byte sameIn(int[] squares) {
+        return (byte) abs(grid[squares[0]] + grid[squares[1]] + grid[squares[2]]);
     }
 
-    public byte sameInACol(int col) {
-        return (byte) abs(grid[col] + grid[CLS + col] + grid[CLS * 2 + col]);
+    public boolean sinstr(int index) {
+        return index - (CLS - 1) - (index / RWS) * (CLS - 1) == 0;
     }
 
-    public byte sameInADig(boolean dig) {
-        return (byte) (dig ? abs(grid[0] + grid[4] + grid[8]) : abs(grid[2] + grid[4] + grid[6]));
+    public boolean dexter(int index) {
+        return index % (RWS * CLS / 2) == 0;
     }
 
+    public int[] row(int row) {
+        return new int[]{row * RWS, row * RWS + 1, row * RWS + 2};
+    }
+
+    public int[] col(int col) {
+        return new int[]{col,       CLS + col,     CLS * 2 + col};
+    }
+
+    public int[] dig(boolean dig) {
+        return dig ? new int[]{0, 4, 8} : new int[]{2, 4, 6};
+    }
 
     public Grid() {
         grid = new byte[RWS * CLS];
