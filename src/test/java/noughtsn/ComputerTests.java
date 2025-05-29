@@ -50,6 +50,17 @@ public class ComputerTests {
         Assertions.assertEquals(2, computer.choose());
     }
 
+    @Test
+    public void computerPrioritisesWins() {
+        grid.play(0);
+        grid.play(1);
+        grid.play(8);
+        grid.play(4);
+        grid.play(6);
+
+        Assertions.assertEquals(7, computer.choose());
+    }
+
     private final Computer computer = new Computer();
     private Grid grid = new Grid();
 
