@@ -8,15 +8,17 @@ public class NoughtsN implements Runnable {
     private final Grid grid;
     private final Computer computer;
 
+    @SuppressWarnings("AssignmentUsedAsCondition")
     @Override
     public void run() {
-        String input = "";
+        String in = "";
+        boolean turn; // true = X. false = O.
 
         do {
             System.out.println(grid);
-            if (grid.getTurn() % 2 == 0) if ((input = scanner.nextLine()).equals("exit")) break;
-        } while (!grid.play(grid.getTurn() % 2 == 0 ? Integer.parseInt(input) - 1 : computer.choose()));
-        System.out.println(grid.getTurn() == 9 ? "Draw." : "You " + (grid.getTurn() % 2 == 0 ? "lose" : "win") + "!");
+            if (turn = grid.getTurn() % 2 == 0) if ((in = scanner.nextLine()).equals("exit")) break;
+        } while (!grid.play(turn ? Integer.parseInt(in) - 1 : computer.choose()));
+        System.out.println(grid.getTurn() == 9 ? "Draw." : "You " + (turn ? "win" : "lose") + "!");
 
         scanner.close();
     }
