@@ -27,6 +27,7 @@ public class AppTests {
     @Test
     public void gridEntry() {
         Computer computer = new TestComputer("2\n");
+
         NoughtsN crosses = new NoughtsN("1\nexit\n", computer);
         crosses.run();
 
@@ -54,6 +55,16 @@ public class AppTests {
         crosses.run();
 
         Assertions.assertEquals("You lose!", (lastLine(readableOut)).trim());
+    }
+
+    @Test
+    public void playerCanDraw() {
+        Computer computer = new TestComputer("4\n5\n3\n8\n");
+
+        NoughtsN crosses = new NoughtsN("1\n9\n6\n7\n2\n", computer);
+        crosses.run();
+
+        Assertions.assertEquals("Draw.", (lastLine(readableOut)).trim());
     }
 
     @AfterEach
