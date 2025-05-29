@@ -17,15 +17,15 @@ public class Grid {
 
     boolean play(int index) {
         if (grid[index] != 0) throw new IllegalArgumentException("Square already played.");
-        grid[index] = (byte) (turn ? +1 : -1);
-        turn = !turn;
+        grid[index] = (byte) (turn++ % 2 == 0 ? -1 : +1);
         history.add(index);
         free.remove(index);
 
-        return dexter(index) && sameIn(dig(DEX)) == 3
-            || sinstr(index) && sameIn(dig(SIN)) == 3
-            || sameIn(col(index % CLS)) == 3
-            || sameIn(row(index / RWS)) == 3;
+        return turn == 9
+                || dexter(index) && sameIn(dig(DEX)) == 3
+                || sinstr(index) && sameIn(dig(SIN)) == 3
+                || sameIn(col(index % CLS)) == 3
+                || sameIn(row(index / RWS)) == 3;
     }
 
     public String toString() {
@@ -88,11 +88,11 @@ public class Grid {
         free = new HashSet<>(Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8));
     }
 
-    public boolean getTurn() {
+    public int getTurn() {
         return turn;
     }
 
-    private boolean turn;      // true = O. false = X.
+    private int turn;
     private final byte[] grid; // Initialised with 0s.
 
     public List<Integer> getHistory() {

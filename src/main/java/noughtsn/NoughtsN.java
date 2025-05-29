@@ -14,9 +14,9 @@ public class NoughtsN implements Runnable {
 
         do {
             System.out.println(grid);
-            if (!grid.getTurn()) if ((input = scanner.nextLine()).equals("exit")) break;
-        } while (!grid.play(grid.getTurn() ? computer.choose() : Integer.parseInt(input) - 1));
-        System.out.println("You " + (grid.getTurn() ? "win!" : "lose!"));
+            if (grid.getTurn() % 2 == 0) if ((input = scanner.nextLine()).equals("exit")) break;
+        } while (!grid.play(grid.getTurn() % 2 == 0 ? Integer.parseInt(input) - 1 : computer.choose()));
+        System.out.println(grid.getTurn() == 9 ? "Draw." : "You " + (grid.getTurn() % 2 == 0 ? "lose" : "win") + "!");
 
         scanner.close();
     }
