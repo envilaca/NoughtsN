@@ -22,14 +22,10 @@ public class Computer {
         throw new IllegalArgumentException();
     }
 
-    // Get an array of the moves that need checking. 🦎🌳
+    // Get an array of the last chosen move and last player move (winning > not losing). 🦎🌳
     private int[] trimmedHist() {
         List<Integer> hist = grid.getHistory();
-        return switch (hist.size()) {
-            case 0  -> new int[0];
-            case 1  -> new int[]{hist.getLast()};
-            default -> new int[]{hist.get(hist.size() - 2), hist.getLast()};
-        };
+        return hist.size() < 2 ? new int[0] : new int[]{hist.get(hist.size() - 2), hist.getLast()};
     }
 
     public void setGrid(Grid grid) {
