@@ -39,11 +39,11 @@ public class Grid {
     // Makes a row string.
     private String getRow(int row) {
         return "\n " +
-                toTwo(grid[row * RWS]) +
+                toTwo(grid[row * CLS]) +
                 " │ " +
-                toTwo(grid[row * RWS + 1]) +
+                toTwo(grid[row * CLS + 1]) +
                 " │ " +
-                toTwo(grid[row * RWS + 2]) +
+                toTwo(grid[row * CLS + 2]) +
                 "\n";
     }
 
@@ -66,11 +66,11 @@ public class Grid {
     }
 
     public boolean dexter(int index) {
-        return index % (RWS * CLS / 2) == 0;
+        return index % (CLS + 1) == 0;
     }
 
     public int[] row(int row) {
-        return new int[]{row * RWS, row * RWS + 1, row * RWS + 2};
+        return new int[]{row * CLS, row * CLS + 1, row * CLS + 2};
     }
 
     public int[] col(int col) {
