@@ -1,6 +1,8 @@
 package noughtsn;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class Computer {
 
@@ -23,12 +25,11 @@ public class Computer {
     // Get an array of the moves that need checking. 🦎🌳
     private int[] trimmedHist() {
         List<Integer> hist = grid.getHistory();
-
-        int[] moves = new int[hist.size() / 2 + 1];
-        if (hist.isEmpty()) moves = new int[0];
-        else moves[0] = hist.getLast();
-        for (int i = 1; i < moves.length; i++) moves[i] = hist.get(hist.size() - i * 2);
-        return moves;
+        return switch (hist.size()) {
+            case 0  -> new int[0];
+            case 1  -> new int[]{hist.getLast()};
+            default -> new int[]{hist.get(hist.size() - 2), hist.getLast()};
+        };
     }
 
     public void setGrid(Grid grid) {
