@@ -1,6 +1,7 @@
 package noughtsn;
 
 import noughtsn.grid.Grid;
+import noughtsn.grid.SlimGrid;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -25,9 +26,10 @@ public class Crosses implements Runnable {
         scanner.close();
     }
 
-    public Crosses(InputStream input) {
+    public Crosses(String[] args, InputStream input) {
         scanner = new Scanner(input);
-        grid = new Grid();
+        if (args.length > 0 && args[0].equals("-slim")) grid = new SlimGrid();
+        else grid = new Grid();
         computer = new Computer();
         computer.setGrid(grid);
     }
