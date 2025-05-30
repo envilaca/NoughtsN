@@ -1,5 +1,7 @@
 package noughtsn;
 
+import noughtsn.grid.Grid;
+
 import java.io.InputStream;
 import java.util.Scanner;
 

@@ -1,11 +1,12 @@
 package noughtsn;
 
+import noughtsn.grid.Grid;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static noughtsn.Grid.CLS;
-import static noughtsn.Grid.RWS;
+import static noughtsn.grid.Grid.CLS;
+import static noughtsn.grid.Grid.RWS;
 
 public class GridTests {
 

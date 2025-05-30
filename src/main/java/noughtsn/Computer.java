@@ -1,5 +1,7 @@
 package noughtsn;
 
+import noughtsn.grid.Grid;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;

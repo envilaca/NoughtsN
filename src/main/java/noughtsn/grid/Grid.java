@@ -1,4 +1,4 @@
-package noughtsn;
+package noughtsn.grid;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,13 +9,13 @@ import static java.lang.Math.abs;
 
 public class Grid {
 
-    protected static final boolean DEX = true;  // Diagonal from upper left to bottom right.
-    protected static final boolean SIN = false; // Diagonal from upper right to bottom left.
+    public static final boolean DEX = true;  // Diagonal from upper left to bottom right.
+    public static final boolean SIN = false; // Diagonal from upper right to bottom left.
 
-    protected static final int RWS = 3; // No. of rows.
-    protected static final int CLS = 3; // No. of columns.
+    public static final int RWS = 3; // No. of rows.
+    public static final int CLS = 3; // No. of columns.
 
-    boolean play(int index) {
+    public boolean play(int index) {
         if (grid[index] != 0) throw new IllegalArgumentException("Square already played.");
         grid[index] = (byte) (turn++ % 2 == 0 ? -1 : +1);
         history.add(index);
@@ -37,23 +37,23 @@ public class Grid {
     }
 
     // Makes a row string.
-    private String getRow(int row) {
+    protected String getRow(int row) {
         return "\n " +
-                toTwo(grid[row * CLS]) +
+                toSymb(grid[row * CLS]) +
                 " │ " +
-                toTwo(grid[row * CLS + 1]) +
+                toSymb(grid[row * CLS + 1]) +
                 " │ " +
-                toTwo(grid[row * CLS + 2]) +
+                toSymb(grid[row * CLS + 2]) +
                 "\n";
     }
 
-    // Converts bytes from grid storage to a string of length two.
-    private String toTwo(byte symb) {
-        return switch (symb) {
+    // Converts bytes from grid storage to a string.
+    protected String toSymb(byte b) {
+        return switch (b) {
             case  0 -> "  ";
             case -1 -> "⟩⟨";
             case +1 -> "()";
-            default -> throw new IllegalStateException("Unexpected value: " + symb);
+            default -> throw new IllegalStateException("Unexpected value: " + b);
         };
     }
 
@@ -92,19 +92,19 @@ public class Grid {
         return turn;
     }
 
-    private int turn;
-    private final byte[] grid; // Initialised with 0s.
+    protected int turn;
+    protected final byte[] grid; // Initialised with 0s.
 
     public List<Integer> getHistory() {
         return history;
     }
 
-    private final List<Integer> history;
+    protected final List<Integer> history;
 
     public Set<Integer> getFree() {
         return free;
     }
 
-    private final Set<Integer> free;
+    protected final Set<Integer> free;
 
 }
