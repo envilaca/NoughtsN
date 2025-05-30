@@ -30,13 +30,6 @@ public class NoughtsN implements Runnable {
         computer.setGrid(grid);
     }
 
-    public NoughtsN(String input) {
-        scanner = new Scanner(input);
-        grid = new Grid();
-        computer = new Computer();
-        computer.setGrid(grid);
-    }
-
     public NoughtsN(String input, Computer computer) {
         scanner = new Scanner(input);
         grid = new Grid();
