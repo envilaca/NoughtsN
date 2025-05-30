@@ -61,6 +61,17 @@ public class ComputerTests {
         Assertions.assertEquals(7, computer.choose());
     }
 
+    @Test
+    public void computerDoesNotOverwriteFreeMoves() {
+        grid.play(6);
+        grid.play(4);
+        grid.play(0);
+        grid.play(3);
+        grid.play(5);
+
+        Assertions.assertDoesNotThrow(computer::choose);
+    }
+
     private final Computer computer = new Computer();
     private Grid grid = new Grid();
 
