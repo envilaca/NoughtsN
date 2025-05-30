@@ -112,6 +112,13 @@ public class GridTests {
         );
     }
 
+    @Test
+    public void slimGridWorks() {
+        grid = new SlimGrid();
+
+        Assertions.assertEquals(emptySlimGrid, grid.toString());
+    }
+
     private Grid grid;
 
     private static final String fullGrid = """
@@ -122,5 +129,13 @@ public class GridTests {
             ────┼────┼────
              ⟩⟨ │ () │ ⟩⟨
             """;
+    private static final String emptySlimGrid = """
+           
+              │   │ \s
+           ───┼───┼───
+              │   │ \s
+           ───┼───┼───
+              │   │ \s
+           """;
 
 }
