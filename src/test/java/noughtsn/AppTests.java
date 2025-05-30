@@ -19,8 +19,8 @@ public class AppTests {
 
     @Test
     public void gridPreview() {
-        NoughtsN crosses = new NoughtsN("exit\n", new Computer());
-        crosses.run();
+        Crosses noughtsn = new Crosses("exit\n", new Computer());
+        noughtsn.run();
 
         Assertions.assertEquals(grid.toString(), lastGrid(readableOut));
     }
@@ -29,8 +29,8 @@ public class AppTests {
     public void gridEntry() {
         Computer computer = new TestComputer("2\n");
 
-        NoughtsN crosses = new NoughtsN("1\nexit\n", computer);
-        crosses.run();
+        Crosses noughtsn = new Crosses("1\nexit\n", computer);
+        noughtsn.run();
 
         grid.play(0);
         grid.play(1);
@@ -42,8 +42,8 @@ public class AppTests {
     public void playerCanWin() {
         Computer computer = new TestComputer("4\n5\n");
 
-        NoughtsN crosses = new NoughtsN("1\n2\n3\n", computer);
-        crosses.run();
+        Crosses noughtsn = new Crosses("1\n2\n3\n", computer);
+        noughtsn.run();
 
         Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
     }
@@ -52,8 +52,8 @@ public class AppTests {
     public void playerCanLose() {
         Computer computer = new TestComputer("3\n5\n7\n");
 
-        NoughtsN crosses = new NoughtsN("1\n6\n8\n", computer);
-        crosses.run();
+        Crosses noughtsn = new Crosses("1\n6\n8\n", computer);
+        noughtsn.run();
 
         Assertions.assertEquals("You lose!", (lastLine(readableOut)).trim());
     }
@@ -62,8 +62,8 @@ public class AppTests {
     public void playerCanDraw() {
         Computer computer = new TestComputer("4\n5\n3\n8\n");
 
-        NoughtsN crosses = new NoughtsN("1\n9\n6\n7\n2\n", computer);
-        crosses.run();
+        Crosses noughtsn = new Crosses("1\n9\n6\n7\n2\n", computer);
+        noughtsn.run();
 
         Assertions.assertEquals("Draw.", (lastLine(readableOut)).trim());
     }

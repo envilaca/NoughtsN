@@ -5,7 +5,7 @@ import noughtsn.grid.Grid;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class NoughtsN implements Runnable {
+public class Crosses implements Runnable {
 
     private final Grid grid;
     private final Computer computer;
@@ -25,14 +25,14 @@ public class NoughtsN implements Runnable {
         scanner.close();
     }
 
-    public NoughtsN(InputStream input) {
+    public Crosses(InputStream input) {
         scanner = new Scanner(input);
         grid = new Grid();
         computer = new Computer();
         computer.setGrid(grid);
     }
 
-    public NoughtsN(String input, Computer computer) {
+    public Crosses(String input, Computer computer) {
         scanner = new Scanner(input);
         grid = new Grid();
         this.computer = computer;
