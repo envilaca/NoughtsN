@@ -95,6 +95,16 @@ public class AppTests {
         return outStr.substring(i + 1);
     }
 
+    @Test
+    public void playerCanWinWithTextInput() {
+        Computer computer = new TestComputer("4\n5\n");
+
+        Game game = new Game("top left\ntop middle\ntop right\n", computer);
+        game.run();
+
+        Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
+    }
+
     private PrintStream originalOut;
     private ByteArrayOutputStream readableOut;
     private Grid grid;
