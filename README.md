@@ -8,6 +8,6 @@ The grid is numbered as follows:
  4 | 5 | 6 
  7 | 8 | 9 
 
-Enter the according number to place an 'X' in that space.
+Enter the according number, or a combination of the row (top/middle/bottom) and column (left/middle/right) to place an 'X' in that space.
 
 The opponent will employ basic noughts and crosses strategy, but is still non-optimal. Given its randomness, however, it is not unlikely for it to randomly play optimal strategy.
