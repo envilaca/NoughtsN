@@ -68,6 +68,16 @@ public class AppTests {
         Assertions.assertEquals("Draw.", (lastLine(readableOut)).trim());
     }
 
+    @Test
+    public void playerCanWinWithTextInput() {
+        Computer computer = new TestComputer("4\n5\n");
+
+        Game game = new Game("top left\ntop middle\ntop right\n", computer);
+        game.run();
+
+        Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
+    }
+
     @AfterEach
     public void afterEach() {
         System.setOut(originalOut);
@@ -93,16 +103,6 @@ public class AppTests {
         while (i >= 0 && outStr.charAt(i) != '\n') i--;
 
         return outStr.substring(i + 1);
-    }
-
-    @Test
-    public void playerCanWinWithTextInput() {
-        Computer computer = new TestComputer("4\n5\n");
-
-        Game game = new Game("top left\ntop middle\ntop right\n", computer);
-        game.run();
-
-        Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
     }
 
     private PrintStream originalOut;
