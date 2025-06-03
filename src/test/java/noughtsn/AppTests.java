@@ -81,6 +81,15 @@ public class AppTests {
         Assertions.assertEquals("You win!", (lastLine(readableOut)).trim());
     }
 
+    @Test
+    public void helpArgDisplaysHelpMsg() {
+        App app = new App(new String[]{"--help"});
+        app.run();
+
+        Assertions.assertEquals(helpMessage, readableOut.toString());
+    }
+
+
     @AfterEach
     public void afterEach() {
         System.setOut(originalOut);
@@ -111,5 +120,24 @@ public class AppTests {
     private PrintStream originalOut;
     private ByteArrayOutputStream readableOut;
     private Grid grid;
+
+    private final String helpMessage = """
+            NoughtsN is a simple implementation of noughts 'n' crosses. The opponent will
+            attempt to win, but does not employ optimal strategy. To place a cross in a
+            square, either enter its corresponding number as shown below:
+                                              1 | 2 | 3
+                                              4 | 5 | 6
+                                              7 | 8 | 9
+            or a its row (top, middle, bottom) then column (left, middle, right). MOBA-style
+            abbreviations (mid, bot) and single letters are also allowed.
+            
+            Examples:
+              1,        3,  4,     8,       5
+              top left, tr, mid l, bot mid, m m
+            
+            Commands:
+              slim - makes the grid slimmer; may look more natural in some shells
+              help - displays this help message
+            """;
 
 }
