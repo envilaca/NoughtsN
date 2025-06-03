@@ -1,7 +1,10 @@
 package noughtsn;
 
 import noughtsn.grid.Grid;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -88,10 +91,10 @@ public class AppTests {
         String outStr = output.toString();
 
         int i = outStr.length() - 1;
-        for (; i >= 0 && outStr.charAt(i) != '│' ; i--);
+        for (; i >= 0 && outStr.charAt(i) != '│'; i--) ;
         int endex = i + 5;
 
-        for (int j = 0; i >= 0 && j < 5 ; i--) if (outStr.charAt(i) == '\n') j++;
+        for (int j = 0; i >= 0 && j < 5; i--) if (outStr.charAt(i) == '\n') j++;
 
         return outStr.substring(i + 1, endex);
     }
