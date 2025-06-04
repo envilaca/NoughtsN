@@ -71,8 +71,10 @@ public class Game implements Runnable {
 
     public Game(String[] args, InputStream input) {
         scanner = new Scanner(input);
-        if (args.length > 0 && args[0].equals("--slim")) grid = new SlimGrid();
-        else grid = new Grid();
+        if (args.length > 0) {
+            if (args[0].equals("--slim")) grid = new SlimGrid();
+            else throw new IllegalArgumentException("unknown option: " + args[0]);
+        } else grid = new Grid();
         computer = new Computer();
         computer.setGrid(grid);
     }
