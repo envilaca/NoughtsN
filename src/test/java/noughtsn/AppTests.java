@@ -86,7 +86,7 @@ public class AppTests {
         App app = new App(new String[]{"--help"});
         app.run();
 
-        Assertions.assertEquals(helpMessage, readableOut.toString());
+        Assertions.assertLinesMatch(helpMessage.lines(), readableOut.toString().lines());
     }
 
 
@@ -128,12 +128,12 @@ public class AppTests {
                                               1 | 2 | 3
                                               4 | 5 | 6
                                               7 | 8 | 9
-            or a its row (top, middle, bottom) then column (left, middle, right). MOBA-style
+            or its row (top, middle, bottom) then column (left, middle, right). MOBA-style
             abbreviations (mid, bot) and single letters are also allowed.
             
             Examples:
-              1,        3,  4,     8,       5
-              top left, tr, mid l, bot mid, m m
+              3,  5,   4,     8,      1
+              tr, m m, mid l, botmid, top left
             
             Commands:
               slim - makes the grid slimmer; may look more natural in some shells
