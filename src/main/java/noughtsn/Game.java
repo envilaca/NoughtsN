@@ -34,7 +34,7 @@ public class Game implements Runnable {
             try {
                 isWon = grid.play(index);
             } catch (IllegalArgumentException ignored) {
-                System.out.println("That square has already been played.");
+                System.out.println("\nThat square has already been played.");
             }
         } while (!isWon);
         System.out.println();

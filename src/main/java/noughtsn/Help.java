@@ -6,6 +6,7 @@ public class Help implements Runnable {
 
     public void run() {
         System.out.println("""
+                
                 NoughtsN is a simple implementation of noughts 'n' crosses. The opponent will
                 attempt to win, but does not employ optimal strategy. To place a cross in a
                 square, either enter its corresponding number as shown below:
