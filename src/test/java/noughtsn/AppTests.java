@@ -89,6 +89,13 @@ public class AppTests {
         Assertions.assertLinesMatch(helpMessage.lines(), readableOut.toString().lines());
     }
 
+    @Test
+    public void invalidArgsInvalid() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Game(new String[]{"--invalid-arg"}, System.in)
+        );
+    }
 
     @AfterEach
     public void afterEach() {
@@ -122,6 +129,7 @@ public class AppTests {
     private Grid grid;
 
     private final String helpMessage = """
+            
             NoughtsN is a simple implementation of noughts 'n' crosses. The opponent will
             attempt to win, but does not employ optimal strategy. To place a cross in a
             square, either enter its corresponding number as shown below:
